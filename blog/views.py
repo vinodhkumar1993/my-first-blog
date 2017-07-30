@@ -1,12 +1,30 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect
 from django.shortcuts import render
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.template.context_processors import csrf
 from django.utils import timezone
 from .models import Post, Comment
 from django.shortcuts import render, get_object_or_404
 from .forms import PostForm, CommentForm
 
 # Create your views here.
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect(request,'accounts/login')
+
+    else:
+        form = UserCreationForm()
+    token = {}
+    token.update(csrf(request))
+    token['form'] = form
+    return render(request,'registration/registration_form.html',token)
+def registration_complete(request):
+    return render(request,'registration/registration_complete.html',{'form':form})
 def post_list(request):
     posts=Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'blog/post_list.html', {'posts':posts})

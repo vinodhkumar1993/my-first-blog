@@ -1,10 +1,12 @@
-{% extends "base.html" %}
-{% block title %}Register{% endblock %}
+{% extends "blog/base.html" %}
+{% block title %}
+<title>Register</title>
+{% endblock %}
 {% block content %}
 
-  <h2>Registration</h2>
+  <!--<h2>Registration</h2>-->
 
-  <form action="/account/register/" method="post">
+  <form action="/accounts/login/" method="post">
   	{% csrf_token %}
     {{form.as_p}}
   <input type="submit" value="Register" />

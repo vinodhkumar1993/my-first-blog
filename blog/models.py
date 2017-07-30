@@ -1,3 +1,4 @@
+from django import forms
 from django.db import models
 from django.utils import timezone
 """class Post(models.Model): – this line defines our model (it is an object).
@@ -6,6 +7,7 @@ class is a special keyword that indicates that we are defining an object.
 Post is the name of our model. We can give it a different name (but we must avoid special characters and whitespace). 
 Always start a class name with an uppercase letter.
 models.Model means that the Post is a Django Model, so Django knows that it should be saved in the database."""
+
 
 class Post(models.Model): # this line defines our model
     author = models.ForeignKey('auth.User')
