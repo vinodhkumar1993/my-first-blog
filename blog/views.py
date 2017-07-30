@@ -15,7 +15,7 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect(request,'accounts/login')
+            return render(request,'accounts/login')
 
     else:
         form = UserCreationForm()
@@ -24,7 +24,7 @@ def register(request):
     token['form'] = form
     return render(request,'registration/registration_form.html',token)
 def registration_complete(request):
-    return render(request,'registration/registration_complete.html',{'form':form})
+    return render(request,'registration/registration_complete.html')
 def post_list(request):
     posts=Post.objects.filter(published_date__lte=timezone.now()).order_by('published_date')
     return render(request, 'blog/post_list.html', {'posts':posts})
