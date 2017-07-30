@@ -15,7 +15,7 @@ def register(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             form.save()
-            return render(request,'accounts/login')
+            return redirect('/')
 
     else:
         form = UserCreationForm()
